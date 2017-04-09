@@ -17,5 +17,8 @@
     },
     "license": "GPL-2.0+",
     "minimum-stability": "dev",
-    "require": {}
+    "require": {
+        "drupal/search_api": "1.0-alpha8",
+        "drupal/facets": "1.0-beta5"
+    }
 }
