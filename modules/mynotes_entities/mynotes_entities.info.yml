@@ -3,3 +3,4 @@ type: module
 description: My Notes default content type and taxonomy vocabulary.
 core: 8.x
 package: My Notes
+hidden: true
