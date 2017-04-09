@@ -1,0 +1,7 @@
+mynotes.action:
+  path: '/mynotes/action/{fieldname}/{nid}'
+  defaults:
+    _controller: '\Drupal\mynotes\Controller\ActionController::perform'
+    _title: 'My Notes'
+  requirements:
+    _permission: 'access mynotes'

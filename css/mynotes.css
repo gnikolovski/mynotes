@@ -1,0 +1,18 @@
+.field--name-field-labels .field__item {
+  display: inline-block;
+}
+
+.note-actions {
+  float:right;
+  font-size: 50% !important;
+}
+
+.facets-checkbox {
+  margin-right: 5px;
+  float: left;
+}
+
+.facet-item__count {
+  margin-left: 5px;
+  font-size: 85%;
+}
