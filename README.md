@@ -22,9 +22,9 @@ blocks placed. You don't have to do anything, just start creating notes.
 
 ## REQUIREMENTS
 
-My Notes depends on two other Drupal 8 modules:
-Search API: https://www.drupal.org/project/search_api
-Facets: https://www.drupal.org/project/facets
+My Notes depends on two other Drupal 8 modules:  
+Search API: https://www.drupal.org/project/search_api  
+Facets: https://www.drupal.org/project/facets  
 
 ## INSTALLATION
 
@@ -48,8 +48,8 @@ If you are an old fashioned or just don't have SSH access to the server, you can
 manually download and install My Notes. Just remember that you also need to
 download and install the following modules:
 
-https://www.drupal.org/project/search_api
-https://www.drupal.org/project/facets
+https://www.drupal.org/project/search_api  
+https://www.drupal.org/project/facets  
 
 *** My Notes assumes that the default theme is Bartik. If that is not the case, 
 then you will have to add facet blocks yourself.
