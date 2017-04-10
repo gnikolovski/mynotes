@@ -42,4 +42,4 @@ processor_configs:
 empty_behavior:
   behavior: text
   text_format: plain_text
-  text: 'No labels. Start by <a href="node/add/note">creating a new label</a>'
+  text: 'No labels. Start by <a href="admin/structure/taxonomy/manage/labels/add">creating a new label</a>'
