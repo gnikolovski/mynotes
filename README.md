@@ -29,27 +29,31 @@ Facets: https://www.drupal.org/project/facets
 ## INSTALLATION
 
 It is recommended that you install My Notes module on a clean Drupal 8 instance.
-So, after you installed Drupal 8, choose one of the following methods to install
-My Notes:
+So, after you have installed Drupal 8, choose one of the following methods to 
+install My Notes:
 
 1. Composer (recommended):
+
 ```
 composer require drupal/mynotes
 ```
 
 2. Drush:
+
 ```
 drush en mynotes -y
 ```
 
 3. Manual installation:
 
-If you are an old fashioned or just don't have SSH access to the server, you can
-manually download and install My Notes. Just remember that you also need to
-download and install the following modules:
+If you are an old-fashioned kind of person, or you don't have SSH access to the 
+server or you just hate the command line, you can manually download and install 
+My Notes. Just remember that you also need to download the following modules 
+first: Search API and Facets.
 
-https://www.drupal.org/project/search_api  
-https://www.drupal.org/project/facets  
+Your feedback helps make My Notes even better, so if you have a feature request 
+you can suggest your idea here: 
+https://www.drupal.org/node/add/project-issue/mynotes
 
 *** My Notes assumes that the default theme is Bartik. If that is not the case, 
 then you will have to add facet blocks yourself.
