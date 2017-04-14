@@ -8,6 +8,7 @@ use Drupal\node\NodeInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Access\AccessResult;
 use Drupal\Component\Utility\Html;
+use Drupal\Core\Url;
 
 /**
  * Implements hook_form_alter().
@@ -74,21 +75,40 @@ function mynotes_entity_extra_field_info() {
  * Assemble content of the pseudo-field.
  */
 function mynotes_node_view(array &$build, EntityInterface $entity, EntityViewDisplayInterface $display, $view_mode) {
-  $links = '';
-
-  // Add/Remove star action.
-  $link_title = $entity->field_stared->value ? t('Remove star') : t('Add star');
-  $links .= '<a class="button note-actions" href="/mynotes/action/stared/' . $entity->nid->value . '">' . $link_title . '</a>';
-
-  // Archive/Unarchive action.
-  $link_title = $entity->field_archived->value ? t('Unarchive') : t('Archive');
-  $links .= '<a class="button note-actions" href="/mynotes/action/archived/' . $entity->nid->value . '">' . $link_title . '</a>';
-
   // Pseudo-field render array.
   if ($display->getComponent('note_actions')) {
     $build['note_actions'] = [
-      '#type' => 'markup',
-      '#markup' => $links,
+      '#type' => 'dropbutton',
+      '#links' => [
+        'star' => [
+          'title' => $entity->field_stared->value ? t('Remove star') : t('Add star'),
+          'url' =>  Url::fromRoute('mynotes.action', [
+            'fieldname' => 'stared',
+            'nid' => $entity->nid->value,
+          ]),
+        ],
+        'archive' => [
+          'title' => $entity->field_archived->value ? t('Unarchive') : t('Archive'),
+          'url' =>  Url::fromRoute('mynotes.action', [
+            'fieldname' => 'archived',
+            'nid' => $entity->nid->value,
+          ]),
+        ],
+        'edit' => [
+          'title' => t('Edit note'),
+          'url' =>  Url::fromRoute('entity.node.edit_form', [
+            'node' => $entity->nid->value,
+            'destination' => Url::fromRoute('view.notes.notes_search')->toString(),
+          ]),
+        ],
+        'delete' => [
+          'title' => t('Delete note'),
+          'url' =>  Url::fromRoute('entity.node.delete_form', [
+            'node' => $entity->nid->value,
+            'destination' => Url::fromRoute('view.notes.notes_search')->toString(),
+          ]),
+        ],
+      ],
     ];
   }
 }

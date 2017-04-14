@@ -2,9 +2,9 @@
   display: inline-block;
 }
 
-.note-actions {
+.dropbutton-widget {
   float:right;
-  font-size: 50% !important;
+  font-size: 65% !important;
 }
 
 .facets-checkbox {
