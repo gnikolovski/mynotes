@@ -76,7 +76,7 @@ function mynotes_uninstall() {
     'stared',
     'archived',
     'labels',
-
+    'views_block__recent_notes_block_1',
   ];
   foreach ($module_blocks as $module_block) {
     $block = Block::load($module_block);
@@ -100,6 +100,12 @@ function mynotes_uninstall() {
 
   // Remove 'Notes' view.
   $view = View::load('notes');
+  if ($view) {
+    $view->delete();
+  }
+
+  // Remove 'Recent notes' view.
+  $view = View::load('recent_notes');
   if ($view) {
     $view->delete();
   }
