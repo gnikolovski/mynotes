@@ -55,47 +55,49 @@ class QuickNoteForm extends FormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
-    $form['title'] = array(
+    $form['title'] = [
       '#type' => 'textfield',
       '#title' => t('Title'),
       '#suffix' => '<span id="validation-message-title" class="validation-message"></span>',
-    );
+    ];
 
-    $form['description'] = array(
+    $form['description'] = [
       '#type' => 'textarea',
       '#title' => t('Description'),
       '#suffix' => '<span id="validation-message-description" class="validation-message"></span>',
-    );
+    ];
 
-    $form['label'] = array(
-      '#type' => 'select',
+    $form['labels'] = [
+      '#type' => 'checkboxes',
       '#title' => t('Label'),
       '#options' => $this->getLabelOptions(),
-    );
+    ];
 
-    $form['submit'] = array(
+    $form['submit'] = [
       '#type' => 'submit',
       '#value' => t('Save'),
-      '#ajax' => array(
-        'callback' => array($this, 'validateFormAjax'),
-        'progress' => array(
+      '#ajax' => [
+        'callback' => [$this, 'validateFormAjax'],
+        'progress' => [
           'type' => 'throbber',
-        ),
-      ),
-    );
+        ],
+      ],
+    ];
 
-    $form['messages'] = array(
+    $form['messages'] = [
       '#type' => '#markup',
-      '#markup' => '<div id="success-message-saved" class="success-message"></div>'
-    );
+      '#markup' => '<div id="success-message-saved" class="success-message"></div>',
+    ];
 
     return $form;
   }
 
+  /**
+   * Generate label options.
+   */
   protected function getLabelOptions() {
     $label_terms = $this->entityManager->getStorage('taxonomy_term')
       ->loadTree('labels');
-    $labels = ['- None -'];
 
     foreach ($label_terms as $label) {
       $labels[$label->tid] = $label->name;
@@ -111,12 +113,15 @@ class QuickNoteForm extends FormBase {
   public function validateFormAjax(array &$form, FormStateInterface $form_state) {
     $has_errors = FALSE;
     $response = new AjaxResponse();
+
     // Validate each of the form fields.
     $title_validation = $this->validateTitle($form, $form_state);
     $description_validation = $this->validateDescription($form, $form_state);
+
     // Initialize message variables.
     $title_message = '';
     $description_message = '';
+
     // Check the validations of each field, and retrieve the error message
     // if present.
     if (!$title_validation['is_valid']) {
@@ -143,9 +148,9 @@ class QuickNoteForm extends FormBase {
    * Validate title.
    */
   protected function validateTitle(array &$form, FormStateInterface $form_state) {
-    $validation  = [
+    $validation = [
       'is_valid' => TRUE,
-      'message' => ''
+      'message' => '',
     ];
     $title = $form_state->getValue('title');
     if (!$title) {
@@ -159,9 +164,9 @@ class QuickNoteForm extends FormBase {
    * Validate description.
    */
   protected function validateDescription(array &$form, FormStateInterface $form_state) {
-    $validation  = [
+    $validation = [
       'is_valid' => TRUE,
-      'message' => ''
+      'message' => '',
     ];
     $description = $form_state->getValue('description');
     if (!$description) {
@@ -176,9 +181,11 @@ class QuickNoteForm extends FormBase {
    */
   public function submitFormAjax(array &$form, FormStateInterface $form_state) {
     $response = new AjaxResponse();
+
     $title = $form_state->getValue('title');
     $description = $form_state->getValue('description');
-    $label = $form_state->getValue('label');
+    $labels = $form_state->getValue('labels');
+
     $node = Node::create([
       'type' => 'note',
       'title' => $title,
@@ -186,42 +193,34 @@ class QuickNoteForm extends FormBase {
         'value' => $description,
         'format' => 'basic_html',
       ],
-      'field_labels' => ['target_id' => $label],
+      'field_labels' => $this->mapLabels($labels),
     ]);
     $node->save();
 
-    $response->addCommand(new InvokeCommand('#edit-title', 'val', ['']));
-    $response->addCommand(new InvokeCommand('#edit-description', 'val', ['']));
+    $response->addCommand(new InvokeCommand('.form-text', 'val', ['']));
+    $response->addCommand(new InvokeCommand('.form-textarea', 'val', ['']));
+    $response->addCommand(new InvokeCommand('.form-checkbox', 'removeAttr', ['checked']));
     $response->addCommand(new HtmlCommand('#validation-message-title', ''));
     $response->addCommand(new HtmlCommand('#validation-message-description', ''));
     $response->addCommand(new HtmlCommand('#success-message-saved', 'Note successfully added.'));
     return $response;
   }
 
+  protected function mapLabels($labels) {
+    $label_tids = [];
+    foreach ($labels as $key => $value) {
+      if ($value) {
+        $label_tids[] = $value;
+      }
+    }
+    return $label_tids;
+  }
+
   /**
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    drupal_set_message("Hi! I'm a form within a block.");
-  }
 
-  protected function clearFormInput(array $form, FormStateInterface $form_state) {
-    // Replace the form entity with an empty instance.
-
-    // Clear user input.
-    $input = $form_state->getUserInput();
-    // We should not clear the system items from the user input.
-    $clean_keys = $form_state->getCleanValueKeys();
-    $clean_keys[] = 'ajax_page_state';
-    foreach ($input as $key => $item) {
-      if (!in_array($key, $clean_keys) && substr($key, 0, 1) !== '_') {
-        unset($input[$key]);
-      }
-    }
-    $form_state->setUserInput($input);
-    // Rebuild the form state values.
-    $form_state->setRebuild();
-    $form_state->setStorage([]);
   }
 
 }
