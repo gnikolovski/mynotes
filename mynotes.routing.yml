@@ -15,7 +15,7 @@ mynotes.quick_note_form:
     _permission: 'access mynotes'
 
 mynotes.quick_note:
-  path: '/mynotes/quick_note'
+  path: '/mynotes/quick-note'
   defaults:
     _controller: '\Drupal\mynotes\Controller\QuickNoteController::openModalForm'
     _title: 'Quick Note'
