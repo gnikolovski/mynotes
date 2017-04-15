@@ -28,3 +28,7 @@
 .success-message {
   color: green;
 }
+
+.js-facets-checkbox-links {
+  list-style: none;
+}
