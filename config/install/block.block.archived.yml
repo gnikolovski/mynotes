@@ -10,7 +10,7 @@ dependencies:
 id: archived
 theme: bartik
 region: sidebar_first
-weight: 0
+weight: -6
 provider: null
 plugin: 'facet_block:archived'
 settings:

@@ -10,7 +10,7 @@ dependencies:
 id: stared
 theme: bartik
 region: sidebar_first
-weight: -6
+weight: -7
 provider: null
 plugin: 'facet_block:stared'
 settings:
