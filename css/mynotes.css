@@ -4,6 +4,10 @@
 
 .dropbutton-widget {
   float:right;
+  font-size: 85% !important;
+}
+
+.path-frontpage .dropbutton-widget {
   font-size: 65% !important;
 }
 
