@@ -67,11 +67,15 @@ class QuickNoteForm extends FormBase {
       '#suffix' => '<span id="validation-message-description" class="validation-message"></span>',
     ];
 
-    $form['labels'] = [
-      '#type' => 'checkboxes',
-      '#title' => t('Label'),
-      '#options' => $this->getLabelOptions(),
-    ];
+    $labels = $this->getLabelOptions();
+
+    if ($labels) {
+      $form['labels'] = [
+        '#type' => 'checkboxes',
+        '#title' => t('Label'),
+        '#options' => $labels,
+      ];
+    }
 
     $form['submit'] = [
       '#type' => 'submit',
@@ -88,6 +92,8 @@ class QuickNoteForm extends FormBase {
       '#type' => '#markup',
       '#markup' => '<div id="success-message-saved" class="success-message"></div>',
     ];
+
+    $form['#attached']['library'][] = 'mynotes/mynotes';
 
     return $form;
   }

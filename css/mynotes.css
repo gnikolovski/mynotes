@@ -16,3 +16,11 @@
   margin-left: 5px;
   font-size: 85%;
 }
+
+.validation-message {
+  color: red;
+}
+
+.success-message {
+  color: green;
+}
