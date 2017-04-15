@@ -208,7 +208,7 @@ class QuickNoteForm extends FormBase {
     $response->addCommand(new InvokeCommand('.form-checkbox', 'removeAttr', ['checked']));
     $response->addCommand(new HtmlCommand('#validation-message-title', ''));
     $response->addCommand(new HtmlCommand('#validation-message-description', ''));
-    $response->addCommand(new HtmlCommand('#success-message-saved', 'Note successfully added.'));
+    $response->addCommand(new HtmlCommand('#success-message-saved', $this->t('Note successfully added.')));
     return $response;
   }
 
