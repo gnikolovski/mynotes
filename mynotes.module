@@ -82,28 +82,29 @@ function mynotes_node_view(array &$build, EntityInterface $entity, EntityViewDis
       '#links' => [
         'star' => [
           'title' => $entity->field_stared->value ? t('Remove star') : t('Add star'),
-          'url' =>  Url::fromRoute('mynotes.action', [
+          'url' => Url::fromRoute('mynotes.action', [
             'fieldname' => 'stared',
             'nid' => $entity->nid->value,
           ]),
         ],
         'archive' => [
           'title' => $entity->field_archived->value ? t('Unarchive') : t('Archive'),
-          'url' =>  Url::fromRoute('mynotes.action', [
+          'url' => Url::fromRoute('mynotes.action', [
             'fieldname' => 'archived',
             'nid' => $entity->nid->value,
           ]),
         ],
         'edit' => [
           'title' => t('Edit note'),
-          'url' =>  Url::fromRoute('entity.node.edit_form', [
+          'url' => Url::fromRoute('entity.node.edit_form', [
             'node' => $entity->nid->value,
-            'destination' => Url::fromRoute('view.notes.notes_search')->toString(),
+            'destination' => Url::fromRoute('view.notes.notes_search')
+              ->toString(),
           ]),
         ],
         'delete' => [
           'title' => t('Delete note'),
-          'url' =>  Url::fromRoute('entity.node.delete_form', [
+          'url' => Url::fromRoute('entity.node.delete_form', [
             'node' => $entity->nid->value,
             'destination' => Url::fromRoute('view.notes.notes_search')->toString(),
           ]),
@@ -137,10 +138,10 @@ function mynotes_form_views_exposed_form_alter(&$form, FormStateInterface $form_
   $facet_params = \Drupal::request()->query->filter('f');
   if (!empty($facet_params) && $form['#id'] == 'views-exposed-form-notes-notes-search') {
     foreach ($facet_params as $delta => $value) {
-      $form['f[' . $delta . ']'] = array(
+      $form['f[' . $delta . ']'] = [
         '#type' => 'hidden',
         '#value' => Html::escape($value),
-      );
+      ];
     }
   }
 }
