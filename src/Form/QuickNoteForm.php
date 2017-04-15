@@ -143,6 +143,7 @@ class QuickNoteForm extends FormBase {
       // Display validation error messages.
       $response->addCommand(new HtmlCommand('#validation-message-title', $title_message));
       $response->addCommand(new HtmlCommand('#validation-message-description', $description_message));
+      $response->addCommand(new HtmlCommand('#success-message-saved', ''));
       return $response;
     }
     else {
