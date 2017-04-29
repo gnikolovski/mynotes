@@ -106,7 +106,8 @@ function mynotes_node_view(array &$build, EntityInterface $entity, EntityViewDis
           'title' => t('Delete note'),
           'url' => Url::fromRoute('entity.node.delete_form', [
             'node' => $entity->nid->value,
-            'destination' => Url::fromRoute('view.notes.notes_search')->toString(),
+            'destination' => Url::fromRoute('view.notes.notes_search')
+              ->toString(),
           ]),
         ],
       ],

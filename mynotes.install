@@ -13,7 +13,10 @@ use Drupal\search_api\Entity\Index;
  */
 function mynotes_install() {
   // Make 'notes' default front page.
-  \Drupal::configFactory()->getEditable('system.site')->set('page.front', '/notes')->save(TRUE);
+  \Drupal::configFactory()
+    ->getEditable('system.site')
+    ->set('page.front', '/notes')
+    ->save(TRUE);
 
   // Grant access to notes to all authenticated users.
   user_role_grant_permissions(AccountInterface::AUTHENTICATED_ROLE, ['access mynotes']);
@@ -36,7 +39,7 @@ function mynotes_install() {
     'Labels' => '/admin/structure/taxonomy/manage/labels/overview',
   ];
 
-  foreach($menu_items as $title => $link) {
+  foreach ($menu_items as $title => $link) {
     $weight = 1;
     $menu_link = MenuLinkContent::create([
       'title' => $title,
@@ -61,12 +64,19 @@ function mynotes_install() {
  */
 function mynotes_uninstall() {
   // Set default front page.
-  \Drupal::configFactory()->getEditable('system.site')->set('page.front', '/node')->save(TRUE);
+  \Drupal::configFactory()
+    ->getEditable('system.site')
+    ->set('page.front', '/node')
+    ->save(TRUE);
 
   // Remove all module menu items.
   $menu_items = MenuLinkContent::loadMultiple();
   foreach ($menu_items as $menu_item) {
-    if ($menu_item->getMenuName() == 'main' && in_array($menu_item->getTitle(), ['Add Note', 'Labels'])) {
+    if ($menu_item->getMenuName() == 'main' && in_array($menu_item->getTitle(), [
+        'Add Note',
+        'Labels',
+      ])
+    ) {
       $menu_item->delete();
     }
   }

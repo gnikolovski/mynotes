@@ -19,7 +19,7 @@ class QuickNoteBlock extends BlockBase {
    * {@inheritdoc}
    */
   public function build() {
-    $form=[];
+    $form = [];
     $form['open_modal'] = [
       '#type' => 'link',
       '#title' => $this->t('Quick note'),
