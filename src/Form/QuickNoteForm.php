@@ -9,11 +9,14 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\Core\Ajax\AjaxResponse;
 use Drupal\Core\Ajax\HtmlCommand;
 use Drupal\Core\Ajax\InvokeCommand;
-use \Drupal\node\Entity\Node;
+use Drupal\node\Entity\Node;
 
+/**
+ * Provides a 'Quick Note' form.
+ */
 class QuickNoteForm extends FormBase {
 
-  // Validation error messages.
+  /** Validation error messages. */
   protected $errorMessages = [];
 
   /**

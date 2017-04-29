@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * @file
+ * Contains mynotes.module.
+ */
+
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\node\Entity\NodeType;
 use Drupal\Core\Entity\EntityInterface;

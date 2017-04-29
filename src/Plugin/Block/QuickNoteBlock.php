@@ -25,7 +25,10 @@ class QuickNoteBlock extends BlockBase {
       '#title' => $this->t('Quick note'),
       '#url' => Url::fromRoute('mynotes.quick_note'),
       '#attributes' => [
-        'class' => ['use-ajax', 'button',],
+        'class' => [
+          'use-ajax',
+          'button',
+        ],
       ],
     ];
     $form['#attached']['library'][] = 'core/drupal.dialog.ajax';

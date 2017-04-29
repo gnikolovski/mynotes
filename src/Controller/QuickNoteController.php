@@ -8,7 +8,9 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\Core\Ajax\AjaxResponse;
 use Drupal\Core\Ajax\OpenModalDialogCommand;
 
-/** * QuickNoteController class. */
+/**
+ * QuickNoteController class.
+ */
 class QuickNoteController extends ControllerBase {
 
   /**
@@ -45,4 +47,5 @@ class QuickNoteController extends ControllerBase {
     $response->addCommand(new OpenModalDialogCommand('Quick note', $quick_note_form, ['width' => '800']));
     return $response;
   }
+  
 }
