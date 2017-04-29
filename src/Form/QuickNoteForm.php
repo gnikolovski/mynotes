@@ -60,13 +60,13 @@ class QuickNoteForm extends FormBase {
   public function buildForm(array $form, FormStateInterface $form_state) {
     $form['title'] = [
       '#type' => 'textfield',
-      '#title' => t('Title'),
+      '#title' => $this->t('Title'),
       '#suffix' => '<span id="validation-message-title" class="validation-message"></span>',
     ];
 
     $form['description'] = [
       '#type' => 'textarea',
-      '#title' => t('Description'),
+      '#title' => $this->t('Description'),
       '#suffix' => '<span id="validation-message-description" class="validation-message"></span>',
     ];
 
@@ -75,14 +75,14 @@ class QuickNoteForm extends FormBase {
     if ($labels) {
       $form['labels'] = [
         '#type' => 'checkboxes',
-        '#title' => t('Label'),
+        '#title' => $this->t('Label'),
         '#options' => $labels,
       ];
     }
 
     $form['submit'] = [
       '#type' => 'submit',
-      '#value' => t('Save'),
+      '#value' => $this->t('Save'),
       '#ajax' => [
         'callback' => [$this, 'validateFormAjax'],
         'progress' => [
