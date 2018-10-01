@@ -18,7 +18,7 @@
     "license": "GPL-2.0+",
     "minimum-stability": "dev",
     "require": {
-        "drupal/search_api": "^1.0@rc",
-        "drupal/facets": "^1.0@alpha"
+        "drupal/search_api": "^1.0",
+        "drupal/facets": "^1.0"
     }
 }
