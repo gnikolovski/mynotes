@@ -1,8 +1,8 @@
-name: My Notes
+name: 'My Notes'
 type: module
-description: Create a simple self-hosted note taking app.
+description: 'Create a simple self-hosted note taking app.'
 core: 8.x
-package: My Notes
+package: 'My Notes'
 dependencies:
   - drupal:search_api
   - drupal:search_api_db
