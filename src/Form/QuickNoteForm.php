@@ -105,6 +105,8 @@ class QuickNoteForm extends FormBase {
    * Generate label options.
    */
   protected function getLabelOptions() {
+    $labels = [];
+
     $label_terms = $this->entityTypeManager->getStorage('taxonomy_term')
       ->loadTree('labels');
 
