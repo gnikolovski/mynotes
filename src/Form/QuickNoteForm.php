@@ -224,14 +224,19 @@ class QuickNoteForm extends FormBase {
   /**
    * Maps labels.
    *
-   * @param array $labels
+   * @param array|null $labels
    *   The labels.
    *
    * @return array
    *   The mapped labels.
    */
-  protected function mapLabels(array $labels) {
+  protected function mapLabels($labels) {
     $label_tids = [];
+
+    if (!$labels) {
+      return $label_tids;
+    }
+
     foreach ($labels as $key => $value) {
       if ($key && $value) {
         $label_tids[] = $value;
