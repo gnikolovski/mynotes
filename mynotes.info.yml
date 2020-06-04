@@ -7,6 +7,5 @@ package: 'My Notes'
 dependencies:
   - search_api:search_api
   - search_api:search_api_db
-  - search_api:search_api_views_taxonomy
   - facets:facets (1.x-dev)
   - mynotes:mynotes_entities
