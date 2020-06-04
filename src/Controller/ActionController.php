@@ -4,7 +4,7 @@ namespace Drupal\mynotes\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\DependencyInjection\ContainerInjectionInterface;
-use Drupal\node\Entity\Node;
+use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -21,16 +21,26 @@ class ActionController extends ControllerBase implements ContainerInjectionInter
    *
    * @var \Symfony\Component\HttpFoundation\RequestStack
    */
-  private $request;
+  protected $request;
+
+  /**
+   * The entity type manager.
+   *
+   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
+   */
+  protected $entityTypeManager;
 
   /**
    * ActionController constructor.
    *
    * @param \Symfony\Component\HttpFoundation\RequestStack $request_stack
    *   The request stack.
+   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
+   *   The entity type manager.
    */
-  public function __construct(RequestStack $request_stack) {
+  public function __construct(RequestStack $request_stack, EntityTypeManagerInterface $entity_type_manager) {
     $this->request = $request_stack->getCurrentRequest();
+    $this->entityTypeManager = $entity_type_manager;
   }
 
   /**
@@ -38,7 +48,8 @@ class ActionController extends ControllerBase implements ContainerInjectionInter
    */
   public static function create(ContainerInterface $container) {
     return new static(
-      $container->get('request_stack')
+      $container->get('request_stack'),
+      $container->get('entity_type.manager')
     );
   }
 
@@ -48,7 +59,9 @@ class ActionController extends ControllerBase implements ContainerInjectionInter
    * Performs actions: Add star/Remove star and Archive/Unarchive.
    */
   public function perform($fieldname, $nid) {
-    $node = Node::load($nid);
+    $node = $this->entityTypeManager
+      ->getStorage('node')
+      ->load($nid);
     $fieldname = 'field_' . $fieldname;
     $current_field_value = $node->{$fieldname}->value;
     $node->{$fieldname}->value = !$current_field_value;

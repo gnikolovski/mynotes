@@ -16,11 +16,15 @@ use Drupal\node\Entity\Node;
  */
 class QuickNoteForm extends FormBase {
 
-  /** Validation error messages. */
+  /**
+   * Validation error messages.
+   *
+   * @var array
+   */
   protected $errorMessages = [];
 
   /**
-   * The entityTypemanager.
+   * The entity type manager.
    *
    * @var \Drupal\Core\Entity\EntityTypeManager
    */
@@ -118,8 +122,7 @@ class QuickNoteForm extends FormBase {
   }
 
   /**
-   * Validate the entire form via AJAX. If validation is passed, the submit
-   * method is called.
+   * Validate the entire form via AJAX.
    */
   public function validateFormAjax(array &$form, FormStateInterface $form_state) {
     $has_errors = FALSE;
@@ -218,10 +221,19 @@ class QuickNoteForm extends FormBase {
     return $response;
   }
 
-  protected function mapLabels($labels) {
+  /**
+   * Maps labels.
+   *
+   * @param array $labels
+   *   The labels.
+   *
+   * @return array
+   *   The mapped labels.
+   */
+  protected function mapLabels(array $labels) {
     $label_tids = [];
     foreach ($labels as $key => $value) {
-      if ($value) {
+      if ($key && $value) {
         $label_tids[] = $value;
       }
     }

@@ -14,6 +14,8 @@ use Drupal\Core\Ajax\OpenModalDialogCommand;
 class QuickNoteController extends ControllerBase {
 
   /**
+   * The form builder.
+   *
    * @var \Drupal\Core\Form\FormBuilder
    */
   protected $formBuilder;
@@ -22,15 +24,14 @@ class QuickNoteController extends ControllerBase {
    * QuickNoteController constructor.
    *
    * @param \Drupal\Core\Form\FormBuilder $formBuilder
+   *   The form builder.
    */
   public function __construct(FormBuilder $formBuilder) {
     $this->formBuilder = $formBuilder;
   }
 
   /**
-   * @param \Symfony\Component\DependencyInjection\ContainerInterface $container
-   *
-   * @return static
+   * {@inheritdoc}
    */
   public static function create(ContainerInterface $container) {
     return new static($container->get('form_builder'));
@@ -40,6 +41,7 @@ class QuickNoteController extends ControllerBase {
    * Open quick note form in modal.
    *
    * @return \Drupal\Core\Ajax\AjaxResponse
+   *   The Ajax response.
    */
   public function openModalForm() {
     $response = new AjaxResponse();
@@ -47,5 +49,5 @@ class QuickNoteController extends ControllerBase {
     $response->addCommand(new OpenModalDialogCommand('Quick note', $quick_note_form, ['width' => '800']));
     return $response;
   }
-  
+
 }
