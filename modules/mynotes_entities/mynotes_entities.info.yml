@@ -2,5 +2,6 @@ name: 'My Notes Entities'
 type: module
 description: 'My Notes default content type and taxonomy vocabulary.'
 core: 8.x
+core_version_requirement: ^8 || ^9
 package: 'My Notes'
 hidden: true
